@@ -16,12 +16,17 @@ public class NodeMultiple {
 	public static final String ERROR_MSG_INDEX_OUT_OF_RANGE = "Index out of range";
 	public static int NODE_MAX_ARITY = 10;
 	private NodeMultiple[] daughters;
+	private Object data;
 	/* Overridden methods */
 	@Override
 	public String toString() {
-		/* TO BE COMPLETED */
+		StringBuilder sb=new StringBuilder();
+		sb.append(data.toString());
+		sb.append("/ndaughters : ");
+		sb.append(daughters);
+		sb.append("("+daughters.length+")");
+		return sb.toString();
 	}
-
 	/* Getters/Setters */
 	/**
 	 * Gets the {@code i}th daughter node.
@@ -32,7 +37,10 @@ public class NodeMultiple {
 	 * @return the {@code i}th daughter node, or {@code null} if it does not exist.
 	 */
 	public NodeMultiple getDaughter(int i) {
-
+		if(i>=NODE_MAX_ARITY || i<0) {
+			ErrorNaiveHandler.abort(ERROR_STATUS_INDEX_OUT_OF_RANGE,ERROR_MSG_INDEX_OUT_OF_RANGE+'@'+getClass()+" .getDaughter()");
+		}
+		return daughters[i];
 	}
 
 	/* TO BE COMPLETED */
@@ -53,7 +61,7 @@ public class NodeMultiple {
 	 * @param i        the daughter node's index
 	 */
 	public void setDaughter(NodeMultiple daughter, int i) {
-		/* TO BE COMPLETED */
+		
 	}
 
 	/**
@@ -67,7 +75,7 @@ public class NodeMultiple {
 	 * @param daughters the daughters to set
 	 */
 	public void setDaughters(NodeMultiple[] daughters) {
-		/* TO BE COMPLETED */
+		this.daughters=daughters;
 	}
 
 	/**
@@ -120,7 +128,8 @@ public class NodeMultiple {
 	 * Default constructor.
 	 */
 	public NodeMultiple() {
-		/* TO BE COMPLETED */
+		this.data=null;
+		daughters=;
 	}
 
 	/**
