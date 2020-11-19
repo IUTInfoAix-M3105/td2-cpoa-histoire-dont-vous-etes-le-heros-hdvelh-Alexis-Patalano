@@ -21,6 +21,27 @@ public class Event extends NodeMultiple {
 	/**
 	 * @return the playerAnswer
 	 */
+	private int id;
+	private GUIManager gui;
+	private String playerAnswer;
+	private int chosenPath;
+	private Scanner reader;
+	static private int lastId=-1;
+	public Event() {
+		
+		this(new GUIManager(),null);
+		// Or this(new GUIManager(),"");
+	}
+	
+	public Event(GUIManager gui, String data) {
+		super(data);
+		this.gui=gui;
+		id = ++lastId;
+		chosenPath = -1;
+		reader=gui.getInputReader();
+	}
+		
+	
 	public String getPlayerAnswer() {
 		/* TO BE COMPLETED */
 	}
@@ -116,6 +137,12 @@ public class Event extends NodeMultiple {
 
 	/* Methods */
 	/* TO BE COMPLETED */
+	public Event run() {
+		gui.outputln(toString());
+		gui.output(PROMPT_ANSWER);
+		playerAnswer = reader.next();
+		chosenPath=interpretAnswer();
+		return getDaughter(chosenPath);
 	}
 }
 
